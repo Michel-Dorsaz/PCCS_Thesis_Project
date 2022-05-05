@@ -9,6 +9,13 @@ namespace BLL
     public static class IngredientsManager
     {
 
+        public const double GLUCID_THRESHOLD = 50;
+        public const double LIPID_THRESHOLD = 35;
+        public const double PROTEIN_THRESHOLD = 15;
+        public const double WARNING_THRESHOLD_1 = 0.1;
+        public const double WARNING_THRESHOLD_2 = 0.3;
+
+
         /// <summary>
         /// Get all the ingredients and categories into a TreeElement array. The elements are not sorted. The
         /// array contains the root element with a nodelevel of -1.
@@ -173,15 +180,16 @@ namespace BLL
         /// <param name="element"></param>
         public static void DeleteRecursive(TreeElement element)
         {
+            
             foreach(TreeElement children in element.Nodes)
             {             
                 DeleteRecursive(children);               
             }
 
             if (element.GetType() == typeof(IngredientCategory))
-                Delete((IngredientCategory)element);
+                IngredientDB.Delete((IngredientCategory)element);
             else if (element.GetType() == typeof(Ingredient))
-                Delete((Ingredient)element);
+                IngredientDB.Delete((Ingredient)element);
         }
 
         /// <summary>

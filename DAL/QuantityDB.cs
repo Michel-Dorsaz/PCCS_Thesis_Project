@@ -105,6 +105,50 @@ namespace DAL
             return quantityType;
         }
 
+        public static Measure? GetMeasureByName(string measureName)
+        {
+            string connectionString = Properties.Settings.Default.DatabaseConnectionString;
+
+            Measure? measure = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string query = @"SELECT Id, Name, Amount, QuantityTypeId   
+                                    FROM QuantityMeasure 
+                                    WHERE Name = @measureName;";
+
+                    SqlCommand cmd = new SqlCommand(query, connection);
+
+                    cmd.Parameters.AddWithValue("@measureName", measureName);
+
+                    connection.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+                    while (reader.Read())
+                    {
+                        measure = new Measure(
+                                reader.GetInt32(0), // Id
+                                reader.GetString(1), // Name
+                                reader.GetDouble(2), // Amount
+                                reader.GetInt32(3) // Quantity Type Id
+                            );
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error while loading the measure : {e}", e.Message);
+                throw new Exception("Error while loading the measure.", e);
+            }
+
+            return measure;
+        }
+
         /// <summary>
         /// Get a base measur for the corresponding quantity type, retrieved by its Id.
         /// </summary>

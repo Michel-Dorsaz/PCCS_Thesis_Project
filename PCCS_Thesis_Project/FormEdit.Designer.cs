@@ -57,7 +57,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(778, 544);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1178, 944);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // panelLeft
@@ -66,9 +66,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeft.Location = new System.Drawing.Point(41, 30);
+            this.panelLeft.Location = new System.Drawing.Point(61, 50);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(320, 456);
+            this.panelLeft.Size = new System.Drawing.Size(488, 796);
             this.panelLeft.TabIndex = 0;
             // 
             // panelRight
@@ -78,9 +78,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRight.AutoScroll = true;
             this.panelRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelRight.Location = new System.Drawing.Point(413, 30);
+            this.panelRight.Location = new System.Drawing.Point(625, 50);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(320, 456);
+            this.panelRight.Size = new System.Drawing.Size(488, 796);
             this.panelRight.TabIndex = 1;
             // 
             // labelInfo
@@ -90,9 +90,9 @@
             this.tableLayoutPanel.SetColumnSpan(this.labelInfo, 5);
             this.labelInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelInfo.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.labelInfo.Location = new System.Drawing.Point(3, 519);
+            this.labelInfo.Location = new System.Drawing.Point(3, 919);
             this.labelInfo.Name = "labelInfo";
-            this.labelInfo.Size = new System.Drawing.Size(772, 25);
+            this.labelInfo.Size = new System.Drawing.Size(1172, 25);
             this.labelInfo.TabIndex = 2;
             // 
             // FormEdit
@@ -101,10 +101,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(174)))), ((int)(((byte)(122)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(778, 544);
+            this.ClientSize = new System.Drawing.Size(1178, 944);
             this.Controls.Add(this.tableLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(1000, 800);
             this.Name = "FormEdit";
             this.Text = "FormEdit";
             this.tableLayoutPanel.ResumeLayout(false);

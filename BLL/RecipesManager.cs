@@ -93,6 +93,24 @@ namespace BLL
         }
 
         /// <summary>
+        /// Update the quantity and measure Id of a recipe's ingredient.
+        /// </summary>
+        /// <param name="tuple"></param>
+        /// <param name="target"></param>
+        public static void ModifyIngredientMeasure(Tuple<Ingredient, Quantity, int> tuple, Measure target)
+        {
+
+            Ingredient ingredient = tuple.Item1;
+            Quantity quantity = tuple.Item2;
+            int recipeId = tuple.Item3;
+
+            double convertedAmount = QuantitiesManager.ConvertMeasureAmount(quantity.Amount, quantity.Measure, target);
+
+            RecipeDB.UpdateIngredientMeasure(recipeId, ingredient.Id, convertedAmount, target.Id);
+
+        }
+
+        /// <summary>
         /// Delete the category and remove it from the TreeView. Manage the deletion
         /// of a category containing children TreeElement by asking the user its intended
         /// action for the children : delete them or add them to the parent of the deleted
@@ -101,6 +119,12 @@ namespace BLL
         /// <param name="category"></param>
         public static void Delete(RecipeCategory category)
         {
+
+            if (category.Id <= 6)
+            {
+                MessagesManager.WarningMessage("You can't remove a base recipe category", MessageBoxButtons.OK);
+                return;
+            }
 
             TreeNode parent = category.Parent;
             TreeView treeView = category.TreeView;
@@ -187,9 +211,9 @@ namespace BLL
             }
 
             if (element.GetType() == typeof(RecipeCategory))
-                Delete((RecipeCategory)element);
+                RecipeDB.Delete((RecipeCategory)element);
             else if (element.GetType() == typeof(Recipe))
-                Delete((Recipe)element);
+                RecipeDB.Delete((Recipe)element);
         }
 
         /// <summary>
@@ -217,6 +241,11 @@ namespace BLL
         public static List<Tuple<Ingredient, Quantity>> GetIngredientsFor(Recipe recipe)
         {
             return RecipeDB.GetIngredientsFor(recipe);
+        }
+
+        public static List<Tuple<Ingredient, Quantity, int>> GetIngredients(Ingredient ingredient)
+        {
+            return RecipeDB.GetIngredients(ingredient);
         }
 
 

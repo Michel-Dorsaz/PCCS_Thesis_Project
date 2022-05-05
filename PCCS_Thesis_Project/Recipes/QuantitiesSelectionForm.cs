@@ -22,7 +22,6 @@ namespace UI.Recipes
 
         private void LoadData(List<Tuple<Ingredient, Quantity>> ingredients)
         {
-                 
             dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Dictionary<int, Tuple<Ingredient, Quantity>> data = new Dictionary<int, Tuple<Ingredient, Quantity>>(ingredients.Count);
 
@@ -32,7 +31,7 @@ namespace UI.Recipes
 
             foreach (Tuple<Ingredient, Quantity> tuple in ingredients)
             {
-                dataGridView.Rows.Add(index, tuple.Item1.Text + "\r\nTest", tuple.Item2.Amount); // Add index, name and amount
+                dataGridView.Rows.Add(index+1, tuple.Item1.Text + "\r\nTest", tuple.Item2.Amount); // Add index, name and amount
                 
                 // Add ComboBox items to the last cell
                 DataGridViewRow row = dataGridView.Rows[index];
@@ -41,6 +40,8 @@ namespace UI.Recipes
                 ((DataGridViewComboBoxCell) row.Cells[3]).Value = tuple.Item2.Measure.Name;
                 index++;
             }
+
+            UpdateNutiments();
 
             dataGridView.CellEndEdit += new DataGridViewCellEventHandler(Cell_OnEndEdit);
         }
@@ -57,29 +58,60 @@ namespace UI.Recipes
             if (e.ColumnIndex == 2)
             {
                 int index = 0;
-                try
-                {
-                    double quantity = double.Parse((string)dataGridView.Rows[e.RowIndex].Cells[2].Value);
-                    index = (int) dataGridView.Rows[e.RowIndex].Cells[0].Value;
-                    Ingredients[index].Item2.Amount = quantity;
-                }
-                catch (Exception ex)
-                {
-                    Log.Information("QuantitiesSelectionPage - on cell edit error : {e}", ex.Message);
-                    MessagesManager.WarningMessage("Number format only !", MessageBoxButtons.OK);
+                double quantity = 0;
 
-                    // Reset the original value if format error
+
+                if (dataGridView.Rows[e.RowIndex].Cells[2].Value is string)
+                {
+                    try
+                    {
+                        quantity = double.Parse((string) dataGridView.Rows[e.RowIndex].Cells[2].Value);
+                    }
+                    catch(FormatException)
+                    {
+                        MessagesManager.InfoMessage("Value " + dataGridView.Rows[e.RowIndex].Cells[2].Value + " incorrect !\r\n" +
+                        "A quantity must be a number !\r\n(Decimal allowed. Use ',' as separator, example: 1,01)", MessageBoxButtons.OK);
+
+                        // Reset the original value if format error
+                        dataGridView.Rows[e.RowIndex].Cells[2].Value = Ingredients[index].Item2.Amount;
+                        return;
+                    }
+                    
+                }
+                else
+                {
+                    quantity = (double)dataGridView.Rows[e.RowIndex].Cells[2].Value;
+                    
+                }
+
+                if (quantity > QuantitiesManager.MAX_VALUE || quantity <= QuantitiesManager.MIN_VALUE)
+                {
+                    MessagesManager.InfoMessage("Value " + quantity + " incorrect !\r\n"
+                        + "A quantity must be greater than " + QuantitiesManager.MIN_VALUE
+                        + " and lower or equal to " + QuantitiesManager.MAX_VALUE, MessageBoxButtons.OK);
+
+                    // Reset the original value
                     dataGridView.Rows[e.RowIndex].Cells[2].Value = Ingredients[index].Item2.Amount;
                 }
+                else
+                {
+                    index = (int)dataGridView.Rows[e.RowIndex].Cells[0].Value - 1;
+                    Ingredients[index].Item2.Amount = quantity;
+                }
+
+                UpdateNutiments();
+
             }
             if(e.ColumnIndex == 3)
             {
                 
                 DataGridViewComboBoxCell cbCell = (DataGridViewComboBoxCell) dataGridView.Rows[e.RowIndex].Cells[3];
-                int ingredientIndex = (int) dataGridView.Rows[e.RowIndex].Cells[0].Value;
+                int ingredientIndex = (int) dataGridView.Rows[e.RowIndex].Cells[0].Value-1;
                 int ItemIndex = cbCell.Items.IndexOf(cbCell.Value.ToString());
 
                 Ingredients[ingredientIndex].Item2.Measure = (Measure) cbCell.Items[ItemIndex];
+
+                UpdateNutiments();
             }
         }
 
@@ -101,10 +133,57 @@ namespace UI.Recipes
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void UpdateNutiments()
+        {
+            double grammes = 0, glucid = 0, lipid = 0, protein = 0;
+
+            foreach (Tuple<Ingredient, Quantity> tuple in Ingredients)
+            {
+                double quantity = tuple.Item2.Amount * tuple.Item2.Measure.AmountInGramme;
+                grammes += quantity;
+                glucid += tuple.Item1.Glucid * quantity;
+                lipid += tuple.Item1.Lipid * quantity;
+                protein += tuple.Item1.Protein * quantity;
+            }
+
+            glucid = (Math.Round(glucid / grammes, 2));
+            lipid = (Math.Round(lipid / grammes, 2));
+            protein = (Math.Round(protein / grammes, 2));
+
+            double upperThreshold1 = 1+IngredientsManager.WARNING_THRESHOLD_1;
+            double lowerThreshold1 = 1-IngredientsManager.WARNING_THRESHOLD_1;
+
+            double upperThreshold2 = 1+IngredientsManager.WARNING_THRESHOLD_2;
+            double lowerTthreshold2 = 1-IngredientsManager.WARNING_THRESHOLD_2;
+
+
+
+            if (glucid < IngredientsManager.GLUCID_THRESHOLD * lowerThreshold1 || glucid > IngredientsManager.GLUCID_THRESHOLD * upperThreshold1)
+                labelGlucidValue.BackColor = Color.Orange;
+            if (glucid < IngredientsManager.GLUCID_THRESHOLD * lowerTthreshold2 || glucid > IngredientsManager.GLUCID_THRESHOLD * upperThreshold2)
+                labelGlucidValue.BackColor = Color.Red;
+
+            if (lipid < IngredientsManager.LIPID_THRESHOLD * lowerThreshold1 || lipid > IngredientsManager.LIPID_THRESHOLD * upperThreshold1)
+                labelLipidValue.BackColor = Color.Orange;
+            if (lipid < IngredientsManager.LIPID_THRESHOLD * lowerTthreshold2 || lipid > IngredientsManager.LIPID_THRESHOLD * upperThreshold2)
+                labelLipidValue.BackColor = Color.Red;
+
+            if (protein < IngredientsManager.PROTEIN_THRESHOLD * lowerThreshold1 || protein > IngredientsManager.PROTEIN_THRESHOLD * upperThreshold1)
+                labelProteinValue.BackColor = Color.Orange;
+            if (protein < IngredientsManager.PROTEIN_THRESHOLD * lowerTthreshold2 || protein > IngredientsManager.PROTEIN_THRESHOLD * upperThreshold2)
+                labelProteinValue.BackColor = Color.Red;
+
+
+            labelGlucidValue.Text = glucid.ToString();
+            labelLipidValue.Text = lipid.ToString();
+            labelProteinValue.Text = protein.ToString();
+
         }
     }
 }

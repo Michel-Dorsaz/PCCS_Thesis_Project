@@ -103,6 +103,16 @@ namespace UI.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap button_newRecipe {
+            get {
+                object obj = ResourceManager.GetObject("button_newRecipe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_style {
             get {
                 object obj = ResourceManager.GetObject("button_style", resourceCulture);
@@ -146,6 +156,16 @@ namespace UI.Properties {
         internal static System.Drawing.Bitmap Reliure {
             get {
                 object obj = ResourceManager.GetObject("Reliure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Settings_icon {
+            get {
+                object obj = ResourceManager.GetObject("Settings_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

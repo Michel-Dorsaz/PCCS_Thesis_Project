@@ -27,7 +27,7 @@ namespace DAL
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
 
-                    string query = @"SELECT Id, Name, CategoryId, NodeLevel, WPP 
+                    string query = @"SELECT Id, Name, CategoryId, NodeLevel, WPP, Portions 
                                     FROM Recipe;";
 
                     SqlCommand cmd = new SqlCommand(query, connection);
@@ -46,7 +46,8 @@ namespace DAL
                                 reader.GetString(1), // Name
                                 reader.GetInt32(2), // Category Id
                                 reader.GetInt32(3), // Node level
-                                reader.GetInt32(4) // WPP
+                                reader.GetInt32(4), // WPP
+                                reader.GetInt32(5) // Portions
                             );
 
 
@@ -103,6 +104,50 @@ namespace DAL
             {
                 Log.Error("Error while saving the recipe {recipe} : {e}", recipe, e.Message);
                 throw new Exception("Error while saving the recipe : " + recipe.Text, e);
+            }
+        }
+
+
+        /// <summary>
+        /// Update the quantity and measure Id of a recipe's ingredient.
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <param name="ingredientId"></param>
+        /// <param name="quantity"></param>
+        /// <param name="measureId"></param>
+        /// <exception cref="Exception"></exception>
+        public static void UpdateIngredientMeasure(int recipeId, int ingredientId, double quantity, int measureId)
+        {
+            string connectionString = Properties.Settings.Default.DatabaseConnectionString;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+
+                    string query = @"UPDATE RecipeIngredients 
+                                    SET Quantity = @quantity, QuantityMeasureId = @measureId 
+                                    WHERE RecipeId = @recipeId
+                                    AND IngredientId = @ingredientId;";
+
+                    SqlCommand cmd = new SqlCommand(query, connection);
+
+
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@measureId", measureId);
+                    cmd.Parameters.AddWithValue("@recipeId", recipeId);
+                    cmd.Parameters.AddWithValue("@ingredientId", ingredientId);
+
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error while updating the recipe ingredient measure : {e}", e.Message);
+                throw new Exception("Error while updating the recipe ingredient measure : ", e);
             }
         }
 
@@ -257,6 +302,85 @@ namespace DAL
 
             return list;
         }
+
+        /// <summary>
+        /// Get all the ingredients and their quantities that relate to the parameter's ingredient.
+        /// </summary>
+        /// <param name="ingredient"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static List<Tuple<Ingredient, Quantity, int>> GetIngredients(Ingredient ingredient)
+        {
+            string connectionString = Properties.Settings.Default.DatabaseConnectionString;
+
+            List<Tuple<Ingredient, Quantity, int>> list;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+
+                    string query = @"SELECT I.Id, I.Name, I.CategoryId, I.NodeLevel, I.Glucid, I.Lipid, I.Protein, I.QuantityTypeId,  
+                                    Q.Id, Q.Name, Q.Amount, Q.QuantityTypeId, 
+                                    R.Quantity, R.RecipeId 
+                                    FROM Ingredient I 
+                                    INNER JOIN RecipeIngredients R 
+                                    ON R.IngredientId = I.Id 
+                                    INNER JOIN QuantityMeasure Q 
+                                    ON Q.Id = R.QuantityMeasureId 
+                                    WHERE R.IngredientId = @IngredientID;";
+
+                    SqlCommand cmd = new SqlCommand(query, connection);
+
+                    cmd.Parameters.AddWithValue("@IngredientID", ingredient.Id);
+
+                    connection.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    list = new List<Tuple<Ingredient, Quantity, int>>();
+
+                    while (reader.Read())
+                    {
+                        Ingredient i = new Ingredient(
+                                reader.GetInt32(0), // Id
+                                reader.GetString(1), // Name
+                                reader.GetInt32(2), // Category Id
+                                reader.GetInt32(3), // Node level
+                                reader.GetInt32(4), // Glucid
+                                reader.GetInt32(5), // Lipid
+                                reader.GetInt32(6), // Protein
+                                reader.GetInt32(7) // Quantity type id
+                                );
+
+                        Measure measure = new Measure(
+                                reader.GetInt32(8), // Id
+                                reader.GetString(9), // Name
+                                reader.GetDouble(10), // Amount
+                                reader.GetInt32(11) // Quantity type id
+                            );
+
+                        Quantity quantity = new Quantity(
+                            reader.GetDouble(12), // quantities
+                            measure
+                            );
+
+                        int recipeId = reader.GetInt32(13);
+
+                        list.Add(new Tuple<Ingredient, Quantity, int>(i, quantity, recipeId));
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error while loading the ingredients {ingredient} : {e}", ingredient.Name, e.Message);
+                throw new Exception("Error while loading ingredients " + ingredient.Name, e);
+            }
+
+            return list;
+        }
+
 
 
         /// <summary>

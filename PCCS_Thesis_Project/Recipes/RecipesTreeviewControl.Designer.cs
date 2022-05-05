@@ -105,7 +105,7 @@
             // buttonNewRecipe
             // 
             this.buttonNewRecipe.BackColor = System.Drawing.SystemColors.Window;
-            this.buttonNewRecipe.BackgroundImage = global::UI.Properties.Resources.button_newIngredient;
+            this.buttonNewRecipe.BackgroundImage = global::UI.Properties.Resources.button_newRecipe;
             this.buttonNewRecipe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonNewRecipe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNewRecipe.Dock = System.Windows.Forms.DockStyle.Fill;

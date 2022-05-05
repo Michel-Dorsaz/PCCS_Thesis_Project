@@ -51,6 +51,7 @@ namespace UI.Recipes
             CurrentRecipe.Name = textBoxName.Text;
             CurrentRecipe.Text = CurrentRecipe.Name + " (WPP: " + CurrentRecipe.WPP + ")";
             CurrentRecipe.WPP = (int) numericUpDownWPP.Value;
+            CurrentRecipe.Portions = (int) numericUpDownPortions.Value;
 
             RecipesManager.Save(CurrentRecipe, Ingredients);
 
@@ -88,6 +89,7 @@ namespace UI.Recipes
                 textBoxName.Text = recipe.Name;
                 labelCategoryText.Text = recipe.GetNodePath(node.Parent);
                 numericUpDownWPP.Value = recipe.WPP;
+                numericUpDownPortions.Value = recipe.Portions;
 
             }
             else if (node.GetType() == typeof(RecipeCategory))
@@ -137,9 +139,18 @@ namespace UI.Recipes
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NumericUpDownWPP_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownWPP_ValueChanged(object? sender, EventArgs e)
         {
             SelectionHandler.TreeView.UpdateCurrentNodeText(textBoxName.Text + " (WPP : " + numericUpDownWPP.Value + ")");
+
+            UpdateIngredients();
+        }
+
+
+
+        private void NumericUpDownPortions_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateWPP(Ingredients);
         }
 
         /// <summary>
@@ -156,7 +167,11 @@ namespace UI.Recipes
             using (IngredientsSelectionForm ingredientSelectionPage = new IngredientsSelectionForm(Ingredients))
             {
                 if (ingredientSelectionPage.ShowDialog() == DialogResult.Continue)
+                {
                     SetIngredients(ingredientSelectionPage.Ingredients);
+                    UpdateWPP(Ingredients);
+                }
+                    
             }
         }
 
@@ -164,8 +179,9 @@ namespace UI.Recipes
         /// Add all the element from the list of pairs Ingredient-Quantity.
         /// </summary>
         /// <param name="ingredients"></param>
-        private void SetIngredients(List<Tuple<Ingredient, Quantity>> ingredients)
-        {
+        private void SetIngredients(List<Tuple<Ingredient, Quantity>> newIngredients)
+        {            
+            List<Tuple<Ingredient, Quantity>> ingredients = new List<Tuple<Ingredient, Quantity>>(newIngredients);
 
             if(ingredients.Count == 0)
             {
@@ -178,19 +194,7 @@ namespace UI.Recipes
             richTextBoxIngredients.Text = "";
 
             // Update the current recipes' ingredients
-            for(int i = 0; i < Ingredients.Count; i++)
-            {
-                Ingredient existingIngredient = Ingredients[i].Item1;
-
-                for (int j = 0; j < ingredients.Count; j++)
-                {
-                    if (existingIngredient.Id == ingredients[j].Item1.Id)
-                    {
-                        ingredients.Remove(ingredients[j]);
-                        j--;
-                    }                     
-                }
-            }
+            Ingredients.Clear();
 
             Ingredients.AddRange(ingredients);
 
@@ -199,6 +203,49 @@ namespace UI.Recipes
             {
                 richTextBoxIngredients.Text += tuple.Item2.Amount + tuple.Item2.Measure.Name + " " + tuple.Item1.Text + "\r\n";
             }
+        }
+
+        private void UpdateWPP(List<Tuple<Ingredient, Quantity>> ingredients)
+        {
+
+            decimal wpp = CalulateWPP(ingredients);
+
+            if(wpp > numericUpDownWPP.Maximum)
+            {
+                numericUpDownWPP.Value = numericUpDownWPP.Maximum;
+                return;
+            }
+
+            numericUpDownWPP.ValueChanged -= NumericUpDownWPP_ValueChanged;
+            numericUpDownWPP.Value = wpp;
+            numericUpDownWPP.ValueChanged += NumericUpDownWPP_ValueChanged;
+        }
+
+        private void UpdateIngredients()
+        {
+            if (Ingredients.Count == 0)
+                return;
+
+            double delta = (double) (numericUpDownWPP.Value/CalulateWPP(Ingredients));
+
+            foreach (Tuple<Ingredient, Quantity> tuple in Ingredients)
+            {
+                tuple.Item2.Amount *= delta;
+            }
+            SetIngredients(Ingredients);
+        }
+
+        private decimal CalulateWPP(List<Tuple<Ingredient, Quantity>> Ingredients)
+        {
+
+            double weight = 0;
+
+            foreach (Tuple<Ingredient, Quantity> tuple in Ingredients)
+            {
+                weight += tuple.Item2.Amount * tuple.Item2.Measure.AmountInGramme;
+            }
+
+            return (decimal) weight / numericUpDownPortions.Value;
         }
     }
 }

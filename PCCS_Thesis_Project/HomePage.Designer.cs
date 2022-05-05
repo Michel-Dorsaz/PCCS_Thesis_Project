@@ -36,7 +36,10 @@ namespace PCCS_Thesis_Project
             this.buttonIngredient = new System.Windows.Forms.Button();
             this.buttonRecipe = new System.Windows.Forms.Button();
             this.buttonPlans = new System.Windows.Forms.Button();
+            this.tableLayoutPanelSettings = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
+            this.tableLayoutPanelSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -54,6 +57,7 @@ namespace PCCS_Thesis_Project
             this.tableLayoutPanel.Controls.Add(this.buttonIngredient, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.buttonRecipe, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.buttonPlans, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.tableLayoutPanelSettings, 2, 0);
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 7;
@@ -139,6 +143,40 @@ namespace PCCS_Thesis_Project
             this.buttonPlans.UseVisualStyleBackColor = false;
             this.buttonPlans.Click += new System.EventHandler(this.ButtonPlans_Click);
             // 
+            // tableLayoutPanelSettings
+            // 
+            this.tableLayoutPanelSettings.ColumnCount = 3;
+            this.tableLayoutPanelSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.81633F));
+            this.tableLayoutPanelSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.18367F));
+            this.tableLayoutPanelSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelSettings.Controls.Add(this.buttonSettings, 1, 1);
+            this.tableLayoutPanelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelSettings.Location = new System.Drawing.Point(432, 3);
+            this.tableLayoutPanelSettings.Name = "tableLayoutPanelSettings";
+            this.tableLayoutPanelSettings.RowCount = 3;
+            this.tableLayoutPanelSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.96774F));
+            this.tableLayoutPanelSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.03226F));
+            this.tableLayoutPanelSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanelSettings.Size = new System.Drawing.Size(281, 71);
+            this.tableLayoutPanelSettings.TabIndex = 5;
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.BackColor = System.Drawing.Color.Transparent;
+            this.buttonSettings.BackgroundImage = global::UI.Properties.Resources.Settings_icon;
+            this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSettings.FlatAppearance.BorderSize = 0;
+            this.buttonSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSettings.Location = new System.Drawing.Point(201, 13);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(41, 31);
+            this.buttonSettings.TabIndex = 4;
+            this.buttonSettings.UseVisualStyleBackColor = false;
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -154,6 +192,7 @@ namespace PCCS_Thesis_Project
             this.Text = "Thesis project";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
+            this.tableLayoutPanelSettings.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -164,5 +203,7 @@ namespace PCCS_Thesis_Project
         private Button buttonRecipe;
         private Button buttonPlans;
         private TableLayoutPaintImproved tableLayoutPanel;
+        private Button buttonSettings;
+        private TableLayoutPanel tableLayoutPanelSettings;
     }
 }

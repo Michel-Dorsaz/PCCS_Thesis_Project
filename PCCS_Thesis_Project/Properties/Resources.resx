@@ -121,11 +121,17 @@
   <data name="Reliure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Reliure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_newIngredient" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_newIngredient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="button_newCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_newCategory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Background_kitchen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Background_kitchen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_newIngredient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_newIngredient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Settings_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,7 +148,7 @@
   <data name="Abc_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Abc_search.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_newCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_newCategory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="button_newRecipe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_newRecipe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

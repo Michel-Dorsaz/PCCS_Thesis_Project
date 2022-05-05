@@ -22,10 +22,20 @@ namespace DTO
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
-            DaysNumber = endDate.Day - startDate.Day + 1;
+            DaysNumber = endDate.Subtract(startDate).Days+1;
             DayModel = new DayModel();
         }
 
-        
+        public MenusPlan()
+        {
+            Id = -1;
+            Name = "";
+            StartDate = DateTime.Today;
+            EndDate = DateTime.Today.AddDays(1);
+            DaysNumber = EndDate.Subtract(StartDate).Days+1;
+            DayModel = new DayModel();
+        }
+
+
     }
 }

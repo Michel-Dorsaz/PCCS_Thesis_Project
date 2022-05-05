@@ -57,10 +57,11 @@
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel.ColumnCount = 3;
+            this.tableLayoutPanel.ColumnCount = 4;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel.Controls.Add(this.labelCategory, 2, 2);
             this.tableLayoutPanel.Controls.Add(this.labelName, 2, 4);
             this.tableLayoutPanel.Controls.Add(this.textBoxName, 2, 5);
@@ -95,7 +96,7 @@
             this.labelCategory.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCategory.Location = new System.Drawing.Point(65, 42);
             this.labelCategory.Name = "labelCategory";
-            this.labelCategory.Size = new System.Drawing.Size(559, 21);
+            this.labelCategory.Size = new System.Drawing.Size(526, 21);
             this.labelCategory.TabIndex = 2;
             this.labelCategory.Text = "Category";
             // 
@@ -106,7 +107,7 @@
             this.labelName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelName.Location = new System.Drawing.Point(65, 84);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(559, 21);
+            this.labelName.Size = new System.Drawing.Size(526, 21);
             this.labelName.TabIndex = 1;
             this.labelName.Text = "Name";
             // 
@@ -118,7 +119,7 @@
             this.textBoxName.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.textBoxName.Location = new System.Drawing.Point(65, 108);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(559, 30);
+            this.textBoxName.Size = new System.Drawing.Size(526, 30);
             this.textBoxName.TabIndex = 4;
             this.textBoxName.TextChanged += new System.EventHandler(this.TextBoxName_TextChanged);
             // 
@@ -145,7 +146,7 @@
             this.labelTitle.ForeColor = System.Drawing.Color.SaddleBrown;
             this.labelTitle.Location = new System.Drawing.Point(34, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(590, 30);
+            this.labelTitle.Size = new System.Drawing.Size(557, 30);
             this.labelTitle.TabIndex = 8;
             this.labelTitle.Text = "Ingredient";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -158,7 +159,7 @@
             this.tableLayoutPanel.SetColumnSpan(this.labelLine, 2);
             this.labelLine.Location = new System.Drawing.Point(34, 40);
             this.labelLine.Name = "labelLine";
-            this.labelLine.Size = new System.Drawing.Size(590, 2);
+            this.labelLine.Size = new System.Drawing.Size(557, 2);
             this.labelLine.TabIndex = 9;
             // 
             // labelCategoryText
@@ -168,18 +169,17 @@
             this.labelCategoryText.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCategoryText.Location = new System.Drawing.Point(65, 63);
             this.labelCategoryText.Name = "labelCategoryText";
-            this.labelCategoryText.Size = new System.Drawing.Size(559, 21);
+            this.labelCategoryText.Size = new System.Drawing.Size(526, 21);
             this.labelCategoryText.TabIndex = 10;
             // 
             // groupBoxNutrients
             // 
-            this.groupBoxNutrients.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxNutrients.Controls.Add(this.tableLayoutPanelNutrients);
+            this.groupBoxNutrients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxNutrients.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBoxNutrients.Location = new System.Drawing.Point(65, 215);
             this.groupBoxNutrients.Name = "groupBoxNutrients";
-            this.groupBoxNutrients.Size = new System.Drawing.Size(559, 166);
+            this.groupBoxNutrients.Size = new System.Drawing.Size(526, 166);
             this.groupBoxNutrients.TabIndex = 6;
             this.groupBoxNutrients.TabStop = false;
             this.groupBoxNutrients.Text = "Nutrients :";
@@ -203,13 +203,13 @@
             this.tableLayoutPanelNutrients.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelNutrients.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelNutrients.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelNutrients.Size = new System.Drawing.Size(553, 136);
+            this.tableLayoutPanelNutrients.Size = new System.Drawing.Size(520, 136);
             this.tableLayoutPanelNutrients.TabIndex = 0;
             // 
             // numericUpDownProtein
             // 
             this.numericUpDownProtein.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.numericUpDownProtein.Location = new System.Drawing.Point(168, 105);
+            this.numericUpDownProtein.Location = new System.Drawing.Point(159, 105);
             this.numericUpDownProtein.Name = "numericUpDownProtein";
             this.numericUpDownProtein.Size = new System.Drawing.Size(180, 31);
             this.numericUpDownProtein.TabIndex = 10;
@@ -217,7 +217,7 @@
             // numericUpDownGlucid
             // 
             this.numericUpDownGlucid.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.numericUpDownGlucid.Location = new System.Drawing.Point(168, 71);
+            this.numericUpDownGlucid.Location = new System.Drawing.Point(159, 71);
             this.numericUpDownGlucid.Name = "numericUpDownGlucid";
             this.numericUpDownGlucid.Size = new System.Drawing.Size(180, 31);
             this.numericUpDownGlucid.TabIndex = 9;
@@ -229,7 +229,7 @@
             this.labelProtein.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelProtein.Location = new System.Drawing.Point(3, 102);
             this.labelProtein.Name = "labelProtein";
-            this.labelProtein.Size = new System.Drawing.Size(159, 25);
+            this.labelProtein.Size = new System.Drawing.Size(150, 25);
             this.labelProtein.TabIndex = 7;
             this.labelProtein.Text = "Protein";
             // 
@@ -240,7 +240,7 @@
             this.labelLipid.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelLipid.Location = new System.Drawing.Point(3, 34);
             this.labelLipid.Name = "labelLipid";
-            this.labelLipid.Size = new System.Drawing.Size(159, 25);
+            this.labelLipid.Size = new System.Drawing.Size(150, 25);
             this.labelLipid.TabIndex = 4;
             this.labelLipid.Text = "Lipid";
             // 
@@ -251,14 +251,14 @@
             this.labelGlucid.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelGlucid.Location = new System.Drawing.Point(3, 68);
             this.labelGlucid.Name = "labelGlucid";
-            this.labelGlucid.Size = new System.Drawing.Size(159, 25);
+            this.labelGlucid.Size = new System.Drawing.Size(150, 25);
             this.labelGlucid.TabIndex = 6;
             this.labelGlucid.Text = "Glucid";
             // 
             // numericUpDownLipid
             // 
             this.numericUpDownLipid.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.numericUpDownLipid.Location = new System.Drawing.Point(168, 37);
+            this.numericUpDownLipid.Location = new System.Drawing.Point(159, 37);
             this.numericUpDownLipid.Name = "numericUpDownLipid";
             this.numericUpDownLipid.Size = new System.Drawing.Size(180, 31);
             this.numericUpDownLipid.TabIndex = 8;
@@ -270,7 +270,7 @@
             this.labelQuantityType.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelQuantityType.Location = new System.Drawing.Point(65, 148);
             this.labelQuantityType.Name = "labelQuantityType";
-            this.labelQuantityType.Size = new System.Drawing.Size(559, 21);
+            this.labelQuantityType.Size = new System.Drawing.Size(526, 21);
             this.labelQuantityType.TabIndex = 11;
             this.labelQuantityType.Text = "Quantity Type";
             // 

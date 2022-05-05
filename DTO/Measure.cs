@@ -7,15 +7,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        /// <summary>
-        /// The ratio between the basic measure and this one, usefull to converts measure quantities.
-        /// <para/>
-        /// The basic measure has an amount of 1.
-        /// <para/>
-        /// By exemple, Kg has an amount of 1000 because the basic measure for weight is g.
-        /// </summary>
-        public double Amount { get; set; }
+        public double AmountInGramme { get; set; }
 
         public int QuantityTypeId { get; set; }
 
@@ -23,7 +15,7 @@
         {
             Id = id;
             Name = name;
-            Amount = amount;
+            AmountInGramme = amount;
             QuantityTypeId = quantityTypeId;
         }
 

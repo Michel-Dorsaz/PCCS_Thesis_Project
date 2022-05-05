@@ -10,13 +10,23 @@ namespace DTO
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
+        public int MenusPlanId { get; set; }
         public Meal[] Meals { get; set; }
 
-        public DayUnit(int id, DateTime date)
+        public DayUnit(int id, DateTime date, int menusPlanId, int mealsNumber)
         {
             Id = id;
             Date = date;
-            Meals = new Meal[1];
+            MenusPlanId = menusPlanId;
+            Meals = new Meal[mealsNumber];
+        }
+
+        public DayUnit(DateTime date, int menusPlanId, int mealsNumber)
+        {
+            Id = -1;
+            Date = date;
+            MenusPlanId = menusPlanId;
+            Meals = new Meal[mealsNumber];
         }
     }
 }

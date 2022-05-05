@@ -10,6 +10,7 @@
         /// Weight per portion
         /// </summary>
         public int WPP { get; set; }
+        public int Portions { get; set; }
 
         /// <summary>
         /// This constructor is used to create an ingredient from existing data. To create a new recipe
@@ -22,7 +23,7 @@
         /// <param name="glucid"></param>
         /// <param name="lipid"></param>
         /// <param name="protein"></param>
-        public Recipe(int id, string name, int categoryId, int nodeLevel, int wpp)
+        public Recipe(int id, string name, int categoryId, int nodeLevel, int wpp, int portions)
         {
             Id = id;
             Name = name;
@@ -30,7 +31,7 @@
             Text = Name + " (WPP: " + WPP + ")";
             ParentId = categoryId;
             NodeLevel = nodeLevel;
-
+            Portions = portions;
 
             ApplyDefaultColor();
         }
@@ -46,6 +47,7 @@
             WPP = 0;
             Text = Name + " (WPP: " + WPP + ")";
             ParentId = -1;
+            Portions = 1;
 
             ApplyDefaultColor();
         }

@@ -9,6 +9,16 @@ namespace BLL
     /// </summary>
     public static class QuantitiesManager
     {
+        /// <summary>
+        /// The maximum value allowed for a quantity.
+        /// </summary>
+        public const double MAX_VALUE = 100000;
+
+        /// <summary>
+        /// The minimum value allowed for a quantity.
+        /// </summary>
+        public const double MIN_VALUE = 0;
+
 
         /// <summary>
         /// Get a quantity type by its DB related Id.
@@ -50,7 +60,7 @@ namespace BLL
         /// <summary>
         /// Get the base measure for a quantity type.
         /// <para/>
-        /// By example, the basic measure for Weight is 'g' and for Volume is 'L'.
+        /// By example, the basic measure for Weight is 'g' and for Volume is 'ml'.
         /// </summary>
         /// <param name="quantyTypeId"></param>
         /// <returns>Measure or null</returns>
@@ -59,6 +69,25 @@ namespace BLL
             try
             {
                 return QuantityDB.GetBaseMeasureFor(quantyTypeId);
+
+            }
+            catch (Exception ex)
+            {
+                MessagesManager.WarningMessage(ex.Message, MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get a measure by its name
+        /// </summary>
+        /// <param name="measureName"></param>
+        /// <returns>Measure or null</returns>
+        public static Measure? GetMeasureByName(string measureName)
+        {
+            try
+            {
+                return QuantityDB.GetMeasureByName(measureName);
 
             }
             catch (Exception ex)
@@ -92,20 +121,15 @@ namespace BLL
         /// Convert a quantity from a measure to another.
         /// <para/>
         /// ConvertMeasureAmount(1000, g, kg) converts 1000g to kg, which return 1.
-        /// <para/>
-        /// Throws an exception if the measures do not belong to the same quantity type.
         /// </summary>
         /// <param name="quantity"></param>
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns>Converted quantity as double</returns>
-        /// <exception cref="Exception"></exception>
         public static double ConvertMeasureAmount(double quantity, Measure source, Measure target)
         {
-            if (source.QuantityTypeId == target.QuantityTypeId)
-                return (quantity * source.Amount) / target.Amount;
-            else
-                throw new Exception("Cannot convert from " + source.Name + " to " + target.Name + " : the measures need to belong to the same quantity type !");
+
+            return (quantity * source.AmountInGramme) / target.AmountInGramme;
         }
     }
 }

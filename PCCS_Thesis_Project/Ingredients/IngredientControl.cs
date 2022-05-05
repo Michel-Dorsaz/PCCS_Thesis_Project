@@ -1,5 +1,6 @@
 ﻿using BLL;
 using DTO;
+using Serilog;
 
 namespace UI.Ingredients
 {
@@ -25,6 +26,7 @@ namespace UI.Ingredients
             Dock = DockStyle.Fill;
 
             comboBoxQuantityType.DataSource = QuantitiesManager.GetAllQuantityTypes();
+            comboBoxQuantityType.DisplayMember = "Name";
 
             /*
              * Supress the windows sound when pressing the enter key. The sound
@@ -50,7 +52,32 @@ namespace UI.Ingredients
             CurrentIngredient.Glucid = (int)numericUpDownGlucid.Value;
             CurrentIngredient.Lipid = (int)numericUpDownLipid.Value;
             CurrentIngredient.Protein = (int)numericUpDownProtein.Value;
-            CurrentIngredient.QuantityTypeId = ((QuantityType) comboBoxQuantityType.SelectedItem).Id;
+
+            if(CurrentIngredient.QuantityTypeId != ((QuantityType)comboBoxQuantityType.SelectedItem).Id)
+            {
+                int quantityTypeId = ((QuantityType)comboBoxQuantityType.SelectedItem).Id;
+
+                List<Tuple<Ingredient, Quantity, int>> ingredients = RecipesManager.GetIngredients(CurrentIngredient);
+
+                Measure? target = QuantitiesManager.GetBaseMeasureFor(quantityTypeId);
+
+                if (target == null)
+                {
+                    Log.Information("IngredientControl - Base measure not found !");
+                    target = new Measure(-1, "g", 1, 1);
+                }
+
+                foreach (Tuple<Ingredient, Quantity, int> tuple in ingredients)
+                {
+
+                    RecipesManager.ModifyIngredientMeasure(tuple, target);
+
+                }
+
+                CurrentIngredient.QuantityTypeId = ((QuantityType)comboBoxQuantityType.SelectedItem).Id;
+            }
+
+            
 
             IngredientsManager.Save(CurrentIngredient);
             SelectionHandler.TreeView.UpdateCurrentNode(CurrentIngredient);

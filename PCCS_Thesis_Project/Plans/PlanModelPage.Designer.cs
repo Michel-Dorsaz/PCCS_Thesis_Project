@@ -37,18 +37,18 @@
             this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Soups = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mainCoursesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dessertsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.snacksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.othersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mealModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.soapsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mainCoursesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dessertsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.snacksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.othersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mealModelBindingSource)).BeginInit();
@@ -147,16 +147,18 @@
             // 
             this.dataGridView.AllowUserToOrderColumns = true;
             this.dataGridView.AutoGenerateColumns = false;
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
-            this.soapsDataGridViewTextBoxColumn,
+            this.Soups,
             this.mainCoursesDataGridViewTextBoxColumn,
             this.dessertsDataGridViewTextBoxColumn,
             this.snacksDataGridViewTextBoxColumn,
             this.othersDataGridViewTextBoxColumn});
             this.tableLayoutPanel.SetColumnSpan(this.dataGridView, 5);
             this.dataGridView.DataSource = this.mealModelBindingSource;
+            this.dataGridView.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView.Location = new System.Drawing.Point(56, 123);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
@@ -164,6 +166,54 @@
             this.dataGridView.RowTemplate.Height = 33;
             this.dataGridView.Size = new System.Drawing.Size(955, 401);
             this.dataGridView.TabIndex = 3;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Meal name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // Soups
+            // 
+            this.Soups.DataPropertyName = "Soups";
+            this.Soups.HeaderText = "Soups";
+            this.Soups.MinimumWidth = 8;
+            this.Soups.Name = "Soups";
+            this.Soups.Width = 150;
+            // 
+            // mainCoursesDataGridViewTextBoxColumn
+            // 
+            this.mainCoursesDataGridViewTextBoxColumn.DataPropertyName = "MainCourses";
+            this.mainCoursesDataGridViewTextBoxColumn.HeaderText = "Main courses";
+            this.mainCoursesDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.mainCoursesDataGridViewTextBoxColumn.Name = "mainCoursesDataGridViewTextBoxColumn";
+            this.mainCoursesDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // dessertsDataGridViewTextBoxColumn
+            // 
+            this.dessertsDataGridViewTextBoxColumn.DataPropertyName = "Desserts";
+            this.dessertsDataGridViewTextBoxColumn.HeaderText = "Desserts";
+            this.dessertsDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.dessertsDataGridViewTextBoxColumn.Name = "dessertsDataGridViewTextBoxColumn";
+            this.dessertsDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // snacksDataGridViewTextBoxColumn
+            // 
+            this.snacksDataGridViewTextBoxColumn.DataPropertyName = "Snacks";
+            this.snacksDataGridViewTextBoxColumn.HeaderText = "Snacks";
+            this.snacksDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.snacksDataGridViewTextBoxColumn.Name = "snacksDataGridViewTextBoxColumn";
+            this.snacksDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // othersDataGridViewTextBoxColumn
+            // 
+            this.othersDataGridViewTextBoxColumn.DataPropertyName = "Others";
+            this.othersDataGridViewTextBoxColumn.HeaderText = "Others";
+            this.othersDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.othersDataGridViewTextBoxColumn.Name = "othersDataGridViewTextBoxColumn";
+            this.othersDataGridViewTextBoxColumn.Width = 150;
             // 
             // mealModelBindingSource
             // 
@@ -221,54 +271,6 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 32);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Meal name";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // soapsDataGridViewTextBoxColumn
-            // 
-            this.soapsDataGridViewTextBoxColumn.DataPropertyName = "Soaps";
-            this.soapsDataGridViewTextBoxColumn.HeaderText = "Soaps";
-            this.soapsDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.soapsDataGridViewTextBoxColumn.Name = "soapsDataGridViewTextBoxColumn";
-            this.soapsDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // mainCoursesDataGridViewTextBoxColumn
-            // 
-            this.mainCoursesDataGridViewTextBoxColumn.DataPropertyName = "MainCourses";
-            this.mainCoursesDataGridViewTextBoxColumn.HeaderText = "MainCourses";
-            this.mainCoursesDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.mainCoursesDataGridViewTextBoxColumn.Name = "mainCoursesDataGridViewTextBoxColumn";
-            this.mainCoursesDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // dessertsDataGridViewTextBoxColumn
-            // 
-            this.dessertsDataGridViewTextBoxColumn.DataPropertyName = "Desserts";
-            this.dessertsDataGridViewTextBoxColumn.HeaderText = "Desserts";
-            this.dessertsDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.dessertsDataGridViewTextBoxColumn.Name = "dessertsDataGridViewTextBoxColumn";
-            this.dessertsDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // snacksDataGridViewTextBoxColumn
-            // 
-            this.snacksDataGridViewTextBoxColumn.DataPropertyName = "Snacks";
-            this.snacksDataGridViewTextBoxColumn.HeaderText = "Snacks";
-            this.snacksDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.snacksDataGridViewTextBoxColumn.Name = "snacksDataGridViewTextBoxColumn";
-            this.snacksDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // othersDataGridViewTextBoxColumn
-            // 
-            this.othersDataGridViewTextBoxColumn.DataPropertyName = "Others";
-            this.othersDataGridViewTextBoxColumn.HeaderText = "Others";
-            this.othersDataGridViewTextBoxColumn.MinimumWidth = 8;
-            this.othersDataGridViewTextBoxColumn.Name = "othersDataGridViewTextBoxColumn";
-            this.othersDataGridViewTextBoxColumn.Width = 150;
-            // 
             // PlanModelPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -276,7 +278,7 @@
             this.ClientSize = new System.Drawing.Size(1070, 603);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "PlanModelPage";
-            this.Text = "PlanModelPage";
+            this.Text = "Plan Model";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -303,8 +305,9 @@
         private Label labelStartDate;
         private Label labelEndDate;
         private TableLayoutPanel tableLayoutPanelButtons;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn soapsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Soups;
         private DataGridViewTextBoxColumn mainCoursesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dessertsDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn snacksDataGridViewTextBoxColumn;

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace UI.Plans
 {
+
+    /// <summary>
+    /// This enum specify the meal types and their corresponding indexes in the tree hierarchy.
+    /// </summary>
     public enum MealTypes
     {
         Soaps = 2,

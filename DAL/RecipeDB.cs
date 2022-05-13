@@ -424,7 +424,7 @@ namespace DAL
         }
 
         /// <summary>
-        /// 
+        /// Delete a recipe and ensure the deletion in related usages.
         /// </summary>
         /// <param name="recipe"></param>
         /// <exception cref="Exception"></exception>
@@ -437,8 +437,12 @@ namespace DAL
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
 
-                    string query = @"DELETE FROM Recipe 
-                                    WHERE Id = @Id";
+                    string query = @"DELETE FROM MealRecipes
+                                    WHERE RecipeId = @Id;
+                                    DELETE FROM RecipeIngredients
+                                    WHERE RecipeId = @Id;
+                                    DELETE FROM Recipe 
+                                    WHERE Id = @Id;";
 
                     SqlCommand cmd = new SqlCommand(query, connection);
 

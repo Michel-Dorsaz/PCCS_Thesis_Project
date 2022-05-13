@@ -31,7 +31,7 @@ namespace UI.Recipes
 
             foreach (Tuple<Ingredient, Quantity> tuple in ingredients)
             {
-                dataGridView.Rows.Add(index+1, tuple.Item1.Text + "\r\nTest", tuple.Item2.Amount); // Add index, name and amount
+                dataGridView.Rows.Add(index+1, tuple.Item1.Text + "\r\n", tuple.Item2.Amount); // Add index, name and amount
                 
                 // Add ComboBox items to the last cell
                 DataGridViewRow row = dataGridView.Rows[index];
@@ -162,7 +162,9 @@ namespace UI.Recipes
             double upperThreshold2 = 1+IngredientsManager.WARNING_THRESHOLD_2;
             double lowerTthreshold2 = 1-IngredientsManager.WARNING_THRESHOLD_2;
 
-
+            labelGlucidValue.BackColor = Color.Green;
+            labelLipidValue.BackColor = Color.Green;
+            labelProteinValue.BackColor = Color.Green;
 
             if (glucid < IngredientsManager.GLUCID_THRESHOLD * lowerThreshold1 || glucid > IngredientsManager.GLUCID_THRESHOLD * upperThreshold1)
                 labelGlucidValue.BackColor = Color.Orange;

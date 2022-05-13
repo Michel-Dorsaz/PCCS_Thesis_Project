@@ -150,7 +150,7 @@
             this.ClientSize = new System.Drawing.Size(956, 544);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "PlanSelectionPage";
-            this.Text = "PlanSelectionPage";
+            this.Text = "Plans ";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.menusPlanBindingSource)).EndInit();

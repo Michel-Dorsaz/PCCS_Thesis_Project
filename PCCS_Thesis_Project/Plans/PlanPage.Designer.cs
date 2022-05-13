@@ -30,10 +30,10 @@
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.labelSchedule = new System.Windows.Forms.Label();
+            this.listViewSchedule = new System.Windows.Forms.ListView();
             this.tableLayoutPanelWeekSchedule = new System.Windows.Forms.TableLayoutPanel();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
-            this.listViewSchedule = new System.Windows.Forms.ListView();
             this.buttonAutoGenerate = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.tableLayoutPanelWeekSchedule.SuspendLayout();
@@ -41,6 +41,7 @@
             // 
             // tableLayoutPanel
             // 
+            this.tableLayoutPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
@@ -67,6 +68,7 @@
             this.labelSchedule.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSchedule.AutoSize = true;
+            this.labelSchedule.BackColor = System.Drawing.Color.White;
             this.labelSchedule.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelSchedule.Location = new System.Drawing.Point(3, 83);
             this.labelSchedule.Name = "labelSchedule";
@@ -74,8 +76,21 @@
             this.labelSchedule.TabIndex = 4;
             this.labelSchedule.Text = "Schedule";
             // 
+            // listViewSchedule
+            // 
+            this.listViewSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewSchedule.Location = new System.Drawing.Point(3, 105);
+            this.listViewSchedule.MultiSelect = false;
+            this.listViewSchedule.Name = "listViewSchedule";
+            this.tableLayoutPanel.SetRowSpan(this.listViewSchedule, 2);
+            this.listViewSchedule.Size = new System.Drawing.Size(193, 442);
+            this.listViewSchedule.TabIndex = 6;
+            this.listViewSchedule.UseCompatibleStateImageBehavior = false;
+            this.listViewSchedule.SelectedIndexChanged += new System.EventHandler(this.ListViewSchedule_SelectedIndexChanged);
+            // 
             // tableLayoutPanelWeekSchedule
             // 
+            this.tableLayoutPanelWeekSchedule.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanelWeekSchedule.ColumnCount = 1;
             this.tableLayoutPanelWeekSchedule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelWeekSchedule.Controls.Add(this.buttonDown, 0, 7);
@@ -99,47 +114,41 @@
             // 
             // buttonDown
             // 
+            this.buttonDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDown.BackColor = System.Drawing.Color.White;
             this.buttonDown.Location = new System.Drawing.Point(3, 360);
             this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Size = new System.Drawing.Size(112, 34);
+            this.buttonDown.Size = new System.Drawing.Size(737, 34);
             this.buttonDown.TabIndex = 3;
             this.buttonDown.Text = "\\/";
-            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.UseVisualStyleBackColor = false;
             this.buttonDown.Click += new System.EventHandler(this.ButtonDown_Click);
             // 
             // buttonUp
             // 
-            this.buttonUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUp.BackColor = System.Drawing.Color.White;
             this.buttonUp.Location = new System.Drawing.Point(3, 14);
             this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Size = new System.Drawing.Size(112, 34);
+            this.buttonUp.Size = new System.Drawing.Size(737, 34);
             this.buttonUp.TabIndex = 2;
             this.buttonUp.Text = "/\\";
-            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.UseVisualStyleBackColor = false;
             this.buttonUp.Click += new System.EventHandler(this.ButtonUp_Click);
-            // 
-            // listViewSchedule
-            // 
-            this.listViewSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewSchedule.Location = new System.Drawing.Point(3, 105);
-            this.listViewSchedule.MultiSelect = false;
-            this.listViewSchedule.Name = "listViewSchedule";
-            this.tableLayoutPanel.SetRowSpan(this.listViewSchedule, 2);
-            this.listViewSchedule.Size = new System.Drawing.Size(193, 442);
-            this.listViewSchedule.TabIndex = 6;
-            this.listViewSchedule.UseCompatibleStateImageBehavior = false;
-            this.listViewSchedule.SelectedIndexChanged += new System.EventHandler(this.ListViewSchedule_SelectedIndexChanged);
             // 
             // buttonAutoGenerate
             // 
             this.buttonAutoGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAutoGenerate.Location = new System.Drawing.Point(857, 23);
+            this.buttonAutoGenerate.BackColor = System.Drawing.Color.White;
+            this.buttonAutoGenerate.Location = new System.Drawing.Point(848, 23);
             this.buttonAutoGenerate.Name = "buttonAutoGenerate";
-            this.buttonAutoGenerate.Size = new System.Drawing.Size(137, 57);
+            this.buttonAutoGenerate.Size = new System.Drawing.Size(146, 57);
             this.buttonAutoGenerate.TabIndex = 7;
             this.buttonAutoGenerate.Text = "Auto-generate meals";
-            this.buttonAutoGenerate.UseVisualStyleBackColor = true;
+            this.buttonAutoGenerate.UseVisualStyleBackColor = false;
             this.buttonAutoGenerate.Click += new System.EventHandler(this.ButtonAutoGenerate_Click);
             // 
             // PlanPage
@@ -149,7 +158,7 @@
             this.ClientSize = new System.Drawing.Size(997, 579);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "PlanPage";
-            this.Text = "PlansPage";
+            this.Text = "Planning";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.tableLayoutPanelWeekSchedule.ResumeLayout(false);
